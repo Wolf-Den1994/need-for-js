@@ -10,7 +10,7 @@ const audio = document.createElement('audio');
 audio.src = 'audio.mp3';
 audio.style.cssText = `position: absolute; top: -1000px;`;
 
-// audio remove();
+// audio remove(); // сделано через 'audio', а не через ember
 
 car.classList.add('car');
 
@@ -67,7 +67,7 @@ function startGame(){
    car.style.left = (gameArea.offsetWidth / 2) - (car.offsetWidth / 2);
    car.style.top = 'auto';
    car.style.bottom = '10px';
-   // document.body.append(audio);
+   // document.body.append(audio); // сделано через 'audio', а не через ember
    setting.x = car.offsetLeft;
    setting.y = car.offsetTop;
    requestAnimationFrame(playGame);
