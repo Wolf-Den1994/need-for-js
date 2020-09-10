@@ -1,3 +1,5 @@
+const MAX_ENEMY = 8;
+
 const score = document.querySelector('.score'),
    start = document.querySelector('.start'),
    gameArea = document.querySelector('.gameArea'),
@@ -33,18 +35,19 @@ function startGame(){
    for (let i = 0; i < getQuantityElementElements(100); i++) {
       const line = document.createElement('div');
       line.classList.add('line');
-      line.style.top = (i * 100) + 'px';
+      line.style.top = `${i * 100}px`;
       line.y = i * 100;
       gameArea.appendChild(line);
    }
 
    for (let i = 0; i < getQuantityElementElements(100 * setting.traffic); i++) {
       const enemy = document.createElement('div');
+      const randomEnemy = Math.floor(Math.random() * MAX_ENEMY) + 1;
       enemy.classList.add('enemy');
       enemy.y = -100 * setting.traffic * (i + 1);
       enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50)) + 'px';
       enemy.style.top = enemy.y + 'px';
-      enemy.style.background = 'transparent url("./image/purpile.png") center / cover no-repeat';
+      enemy.style.background = `transparent url("./image/enemy${randomEnemy}.png") center / cover no-repeat`;
       gameArea.appendChild(enemy);
    }
 
@@ -85,13 +88,17 @@ function playGame(){
 }
 
 function startRun(event){
-   event.preventDefault();
-   keys[event.key] = true;
+   if (keys.hasOwnProperty(event.key)) {
+      event.preventDefault();
+      keys[event.key] = true;
+   }
 }
 
 function stopRun(event){
-   event.preventDefault();
-   keys[event.key] = false;
+   if (keys.hasOwnProperty(event.key)) {
+      event.preventDefault();
+      keys[event.key] = false;
+   }
 }
 
 function moveRoad() {
